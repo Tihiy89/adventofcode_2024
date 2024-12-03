@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "iosfwd": "cpp",
+    "type_traits": "cpp",
+    "vector": "cpp",
+    "xiosbase": "cpp"
+  }
+}

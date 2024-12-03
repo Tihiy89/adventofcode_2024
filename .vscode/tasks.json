@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "CXX_build",
+      "command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\Llvm\\x64\\bin\\clang-cl.exe",
+      "args": [
+        "-Werror=unknown-argument",
+        "-fcolor-diagnostics",
+        "-fansi-escape-codes",
+        "/Zi",
+        "${file}",
+        "-o",
+        "${workspaceFolder}\\_build\\${relativeFileDirname}\\${fileDirnameBasename}.exe"
+      ],
+      "options": {
+        "cwd": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\Llvm\\x64\\bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "compiler: C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\Llvm\\x64\\bin\\clang-cl.exe",
+      "dependsOn": ["prepare dir"]
+    },
+    {
+      "label": "prepare dir",
+      "type": "shell",
+      "command": "${workspaceFolder}/.vscode/prepare_dir.cmd",
+      "args": ["${workspaceFolder}\\_build\\${relativeFileDirname}"]
+    }
+  ]
+}
