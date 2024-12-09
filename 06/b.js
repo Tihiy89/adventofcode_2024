@@ -1,3 +1,5 @@
+// valid
+
 import { input_a as input_a } from "./input.js";
 
 class Point {
@@ -47,6 +49,7 @@ function checkMap(map_in) {
     const nextVal = (lab_map[nextY] ?? [])[nextX];
     if (nextVal == undefined) {
       step_a++;
+      way_points.push([position.y, position.x, position.direction[3]]);
       position.valid = false;
     }
 
@@ -67,7 +70,11 @@ function checkMap(map_in) {
             : "+";
       }
 
-      if (nextVal == ".") {
+      if (
+        !way_points.find(
+          (item) => item[0] == position.y && item[1] == position.x
+        )
+      ) {
         way_points.push([position.y, position.x, position.direction[3]]);
         step_a++;
       }
@@ -79,6 +86,7 @@ function checkMap(map_in) {
       position.y = nextY;
     }
     if (
+      position.valid &&
       way_points.find(
         (i) =>
           i[0] == position.y &&
@@ -116,11 +124,11 @@ for (let i = 0; i < way_points.length; i++) {
 
 console.log("A", a.step);
 console.log("B", sum_loop);
-console.log(
-  getMap()
-    .lab_map.map((i) => i.join(""))
-    .join("\n")
-);
+// console.log(
+//   getMap()
+//     .lab_map.map((i) => i.join(""))
+//     .join("\n")
+// );
 
 // console.log("");
 // console.log(a.lab_map.map((i) => i.join("")).join("\n"));

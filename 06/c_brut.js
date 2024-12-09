@@ -1,4 +1,6 @@
-import { input_a as input_a } from "./input.js";
+// no_valid
+
+import { input_a_mini as input_a } from "./input.js";
 
 class Point {
   x;
@@ -67,7 +69,11 @@ function checkMap(map_in) {
             : "+";
       }
 
-      if (nextVal == ".") {
+      if (
+        !way_points.find(
+          (item) => item[0] == position.y && item[1] == position.x
+        )
+      ) {
         way_points.push([position.y, position.x, position.direction[3]]);
         step_a++;
       }
@@ -96,6 +102,9 @@ function checkMap(map_in) {
 
 const a = checkMap();
 const { way_points } = a;
+const susp_points = [];
+
+way_points.sort((a, b) => (a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]));
 
 let sum_loop = 0;
 for (let i1 = 0; i1 < a.lab_map.length; i1++) {
@@ -111,6 +120,11 @@ for (let i1 = 0; i1 < a.lab_map.length; i1++) {
       const aaa = checkMap(map);
       const { isLoop } = aaa;
       sum_loop += isLoop ? 1 : 0;
+
+      // susp_test
+      if (isLoop && !way_points.find((i) => i[0] == i1 && i[1] == i2)) {
+        susp_points.push([i1, i2, aaa]);
+      }
     }
   }
 }
