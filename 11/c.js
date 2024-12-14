@@ -1,7 +1,7 @@
 import { input_a as input_a } from "./input.js";
 console.time("part A");
 
-const COUNT_STEP = 75;
+const COUNT_STEP = 40;
 
 let input = input_a().split(" ").map(Number);
 
@@ -18,6 +18,8 @@ function saveCache(lev, inp, sum) {
 }
 
 const res_arr = [];
+const use_cache = {};
+const count_wc = [0, 0];
 
 function blink(inp, lev) {
   if (lev == COUNT_STEP) {
@@ -29,8 +31,12 @@ function blink(inp, lev) {
   const cc = findCache(lev, inp);
   if (cc != undefined) {
     // console.log("cache", lev, inp, cc);
+    use_cache[lev + "_" + inp] = use_cache[lev + "_" + inp] ?? 0;
+    use_cache[lev + "_" + inp] += 1;
+    count_wc[0]++;
     return cc;
   }
+  count_wc[1]++;
 
   let sum = 0;
   if (inp == 0) {
@@ -55,5 +61,6 @@ const sum = input.reduce((sum, i) => {
 
 // console.log(res_arr);
 console.log("A", sum);
+console.log(use_cache, count_wc);
 
 console.timeEnd("part A");
